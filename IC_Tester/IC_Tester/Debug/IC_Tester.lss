@@ -1,0 +1,546 @@
+
+IC_Tester.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000388  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000012  00800060  00000388  0000041c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000024  00800072  00800072  0000042e  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000042e  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000460  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000058  00000000  00000000  0000049c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000849  00000000  00000000  000004f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000601  00000000  00000000  00000d3d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000003b0  00000000  00000000  0000133e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000bc  00000000  00000000  000016f0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000003ea  00000000  00000000  000017ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000000e6  00000000  00000000  00001b96  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000048  00000000  00000000  00001c7c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e8 e8       	ldi	r30, 0x88	; 136
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a2 37       	cpi	r26, 0x72	; 114
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a2 e7       	ldi	r26, 0x72	; 114
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a6 39       	cpi	r26, 0x96	; 150
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 6b 01 	call	0x2d6	; 0x2d6 <main>
+  8a:	0c 94 c2 01 	jmp	0x384	; 0x384 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <pattern_handling>:
+    }
+}
+
+
+// this function provide Direction ,logic of each pin and the position of input pins
+void pattern_handling(char *pattern_string){
+  92:	cf 92       	push	r12
+  94:	df 92       	push	r13
+  96:	ef 92       	push	r14
+  98:	ff 92       	push	r15
+  9a:	0f 93       	push	r16
+  9c:	1f 93       	push	r17
+  9e:	cf 93       	push	r28
+  a0:	df 93       	push	r29
+	uint8_t i ;
+	uint8_t size = sizeof(pattern_string)/sizeof(char);
+	for(i = 0 ; i < size ; i++){
+  a2:	80 e0       	ldi	r24, 0x00	; 0
+  a4:	b2 c0       	rjmp	.+356    	; 0x20a <pattern_handling+0x178>
+		position = (1 << i);
+  a6:	41 e0       	ldi	r20, 0x01	; 1
+  a8:	50 e0       	ldi	r21, 0x00	; 0
+  aa:	08 2e       	mov	r0, r24
+  ac:	02 c0       	rjmp	.+4      	; 0xb2 <pattern_handling+0x20>
+  ae:	44 0f       	add	r20, r20
+  b0:	55 1f       	adc	r21, r21
+  b2:	0a 94       	dec	r0
+  b4:	e2 f7       	brpl	.-8      	; 0xae <pattern_handling+0x1c>
+  b6:	50 93 8b 00 	sts	0x008B, r21	; 0x80008b <position+0x1>
+  ba:	40 93 8a 00 	sts	0x008A, r20	; 0x80008a <position>
+		if (pattern_str[i] == 'L' || pattern_str[i] == 'H'){
+  be:	20 91 61 00 	lds	r18, 0x0061	; 0x800061 <pattern_str>
+  c2:	30 91 62 00 	lds	r19, 0x0062	; 0x800062 <pattern_str+0x1>
+  c6:	f9 01       	movw	r30, r18
+  c8:	e8 0f       	add	r30, r24
+  ca:	f1 1d       	adc	r31, r1
+  cc:	90 81       	ld	r25, Z
+  ce:	9c 34       	cpi	r25, 0x4C	; 76
+  d0:	19 f0       	breq	.+6      	; 0xd8 <pattern_handling+0x46>
+  d2:	98 34       	cpi	r25, 0x48	; 72
+  d4:	09 f0       	breq	.+2      	; 0xd8 <pattern_handling+0x46>
+  d6:	4c c0       	rjmp	.+152    	; 0x170 <pattern_handling+0xde>
+			pattern.input_pins[pattern.input_pins_size] = i;
+  d8:	a3 e7       	ldi	r26, 0x73	; 115
+  da:	b0 e0       	ldi	r27, 0x00	; 0
+  dc:	54 96       	adiw	r26, 0x14	; 20
+  de:	9c 91       	ld	r25, X
+  e0:	54 97       	sbiw	r26, 0x14	; 20
+  e2:	c9 2f       	mov	r28, r25
+  e4:	d0 e0       	ldi	r29, 0x00	; 0
+  e6:	cd 58       	subi	r28, 0x8D	; 141
+  e8:	df 4f       	sbci	r29, 0xFF	; 255
+  ea:	88 87       	std	Y+8, r24	; 0x08
+			pattern.input_pins_size++;
+  ec:	9f 5f       	subi	r25, 0xFF	; 255
+  ee:	54 96       	adiw	r26, 0x14	; 20
+  f0:	9c 93       	st	X, r25
+  f2:	54 97       	sbiw	r26, 0x14	; 20
+			pattern.Direction &= ~(position);
+  f4:	8a 01       	movw	r16, r20
+  f6:	00 95       	com	r16
+  f8:	10 95       	com	r17
+  fa:	01 2e       	mov	r0, r17
+  fc:	00 0c       	add	r0, r0
+  fe:	22 0b       	sbc	r18, r18
+ 100:	33 0b       	sbc	r19, r19
+ 102:	cd 90       	ld	r12, X+
+ 104:	dd 90       	ld	r13, X+
+ 106:	ed 90       	ld	r14, X+
+ 108:	fc 90       	ld	r15, X
+ 10a:	13 97       	sbiw	r26, 0x03	; 3
+ 10c:	c0 22       	and	r12, r16
+ 10e:	d1 22       	and	r13, r17
+ 110:	e2 22       	and	r14, r18
+ 112:	f3 22       	and	r15, r19
+ 114:	cd 92       	st	X+, r12
+ 116:	dd 92       	st	X+, r13
+ 118:	ed 92       	st	X+, r14
+ 11a:	fc 92       	st	X, r15
+ 11c:	13 97       	sbiw	r26, 0x03	; 3
+			pattern.logic = (pattern_str[i] == 'L') ? pattern.logic & ~position : pattern.logic | position;
+ 11e:	90 81       	ld	r25, Z
+ 120:	9c 34       	cpi	r25, 0x4C	; 76
+ 122:	69 f4       	brne	.+26     	; 0x13e <pattern_handling+0xac>
+ 124:	40 91 77 00 	lds	r20, 0x0077	; 0x800077 <pattern+0x4>
+ 128:	50 91 78 00 	lds	r21, 0x0078	; 0x800078 <pattern+0x5>
+ 12c:	60 91 79 00 	lds	r22, 0x0079	; 0x800079 <pattern+0x6>
+ 130:	70 91 7a 00 	lds	r23, 0x007A	; 0x80007a <pattern+0x7>
+ 134:	40 23       	and	r20, r16
+ 136:	51 23       	and	r21, r17
+ 138:	62 23       	and	r22, r18
+ 13a:	73 23       	and	r23, r19
+ 13c:	10 c0       	rjmp	.+32     	; 0x15e <pattern_handling+0xcc>
+ 13e:	00 91 77 00 	lds	r16, 0x0077	; 0x800077 <pattern+0x4>
+ 142:	10 91 78 00 	lds	r17, 0x0078	; 0x800078 <pattern+0x5>
+ 146:	20 91 79 00 	lds	r18, 0x0079	; 0x800079 <pattern+0x6>
+ 14a:	30 91 7a 00 	lds	r19, 0x007A	; 0x80007a <pattern+0x7>
+ 14e:	05 2e       	mov	r0, r21
+ 150:	00 0c       	add	r0, r0
+ 152:	66 0b       	sbc	r22, r22
+ 154:	77 0b       	sbc	r23, r23
+ 156:	40 2b       	or	r20, r16
+ 158:	51 2b       	or	r21, r17
+ 15a:	62 2b       	or	r22, r18
+ 15c:	73 2b       	or	r23, r19
+ 15e:	40 93 77 00 	sts	0x0077, r20	; 0x800077 <pattern+0x4>
+ 162:	50 93 78 00 	sts	0x0078, r21	; 0x800078 <pattern+0x5>
+ 166:	60 93 79 00 	sts	0x0079, r22	; 0x800079 <pattern+0x6>
+ 16a:	70 93 7a 00 	sts	0x007A, r23	; 0x80007a <pattern+0x7>
+ 16e:	4c c0       	rjmp	.+152    	; 0x208 <pattern_handling+0x176>
+		}
+		else {
+			if (pattern_str[i] == '0' || pattern_str[i] == 'G'){
+ 170:	90 33       	cpi	r25, 0x30	; 48
+ 172:	11 f0       	breq	.+4      	; 0x178 <pattern_handling+0xe6>
+ 174:	97 34       	cpi	r25, 0x47	; 71
+ 176:	31 f5       	brne	.+76     	; 0x1c4 <pattern_handling+0x132>
+				pattern.Direction |= position;
+ 178:	e3 e7       	ldi	r30, 0x73	; 115
+ 17a:	f0 e0       	ldi	r31, 0x00	; 0
+ 17c:	8a 01       	movw	r16, r20
+ 17e:	05 2e       	mov	r0, r21
+ 180:	00 0c       	add	r0, r0
+ 182:	22 0b       	sbc	r18, r18
+ 184:	33 0b       	sbc	r19, r19
+ 186:	c0 80       	ld	r12, Z
+ 188:	d1 80       	ldd	r13, Z+1	; 0x01
+ 18a:	e2 80       	ldd	r14, Z+2	; 0x02
+ 18c:	f3 80       	ldd	r15, Z+3	; 0x03
+ 18e:	0c 29       	or	r16, r12
+ 190:	1d 29       	or	r17, r13
+ 192:	2e 29       	or	r18, r14
+ 194:	3f 29       	or	r19, r15
+ 196:	00 83       	st	Z, r16
+ 198:	11 83       	std	Z+1, r17	; 0x01
+ 19a:	22 83       	std	Z+2, r18	; 0x02
+ 19c:	33 83       	std	Z+3, r19	; 0x03
+				pattern.logic &= ~(position);
+ 19e:	40 95       	com	r20
+ 1a0:	50 95       	com	r21
+ 1a2:	05 2e       	mov	r0, r21
+ 1a4:	00 0c       	add	r0, r0
+ 1a6:	66 0b       	sbc	r22, r22
+ 1a8:	77 0b       	sbc	r23, r23
+ 1aa:	04 81       	ldd	r16, Z+4	; 0x04
+ 1ac:	15 81       	ldd	r17, Z+5	; 0x05
+ 1ae:	26 81       	ldd	r18, Z+6	; 0x06
+ 1b0:	37 81       	ldd	r19, Z+7	; 0x07
+ 1b2:	40 23       	and	r20, r16
+ 1b4:	51 23       	and	r21, r17
+ 1b6:	62 23       	and	r22, r18
+ 1b8:	73 23       	and	r23, r19
+ 1ba:	44 83       	std	Z+4, r20	; 0x04
+ 1bc:	55 83       	std	Z+5, r21	; 0x05
+ 1be:	66 83       	std	Z+6, r22	; 0x06
+ 1c0:	77 83       	std	Z+7, r23	; 0x07
+ 1c2:	22 c0       	rjmp	.+68     	; 0x208 <pattern_handling+0x176>
+			}
+			else if (pattern_str[i] == '1' || pattern_str[i] == 'V'){
+ 1c4:	91 33       	cpi	r25, 0x31	; 49
+ 1c6:	11 f0       	breq	.+4      	; 0x1cc <pattern_handling+0x13a>
+ 1c8:	96 35       	cpi	r25, 0x56	; 86
+ 1ca:	f1 f4       	brne	.+60     	; 0x208 <pattern_handling+0x176>
+				pattern.Direction |= position;
+ 1cc:	05 2e       	mov	r0, r21
+ 1ce:	00 0c       	add	r0, r0
+ 1d0:	66 0b       	sbc	r22, r22
+ 1d2:	77 0b       	sbc	r23, r23
+ 1d4:	e3 e7       	ldi	r30, 0x73	; 115
+ 1d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 1d8:	00 81       	ld	r16, Z
+ 1da:	11 81       	ldd	r17, Z+1	; 0x01
+ 1dc:	22 81       	ldd	r18, Z+2	; 0x02
+ 1de:	33 81       	ldd	r19, Z+3	; 0x03
+ 1e0:	04 2b       	or	r16, r20
+ 1e2:	15 2b       	or	r17, r21
+ 1e4:	26 2b       	or	r18, r22
+ 1e6:	37 2b       	or	r19, r23
+ 1e8:	00 83       	st	Z, r16
+ 1ea:	11 83       	std	Z+1, r17	; 0x01
+ 1ec:	22 83       	std	Z+2, r18	; 0x02
+ 1ee:	33 83       	std	Z+3, r19	; 0x03
+				pattern.logic |= position;
+ 1f0:	04 81       	ldd	r16, Z+4	; 0x04
+ 1f2:	15 81       	ldd	r17, Z+5	; 0x05
+ 1f4:	26 81       	ldd	r18, Z+6	; 0x06
+ 1f6:	37 81       	ldd	r19, Z+7	; 0x07
+ 1f8:	40 2b       	or	r20, r16
+ 1fa:	51 2b       	or	r21, r17
+ 1fc:	62 2b       	or	r22, r18
+ 1fe:	73 2b       	or	r23, r19
+ 200:	44 83       	std	Z+4, r20	; 0x04
+ 202:	55 83       	std	Z+5, r21	; 0x05
+ 204:	66 83       	std	Z+6, r22	; 0x06
+ 206:	77 83       	std	Z+7, r23	; 0x07
+
+// this function provide Direction ,logic of each pin and the position of input pins
+void pattern_handling(char *pattern_string){
+	uint8_t i ;
+	uint8_t size = sizeof(pattern_string)/sizeof(char);
+	for(i = 0 ; i < size ; i++){
+ 208:	8f 5f       	subi	r24, 0xFF	; 255
+ 20a:	82 30       	cpi	r24, 0x02	; 2
+ 20c:	08 f4       	brcc	.+2      	; 0x210 <pattern_handling+0x17e>
+ 20e:	4b cf       	rjmp	.-362    	; 0xa6 <pattern_handling+0x14>
+				pattern.Direction |= position;
+				pattern.logic |= position;
+			}
+		}
+	}
+}
+ 210:	df 91       	pop	r29
+ 212:	cf 91       	pop	r28
+ 214:	1f 91       	pop	r17
+ 216:	0f 91       	pop	r16
+ 218:	ff 90       	pop	r15
+ 21a:	ef 90       	pop	r14
+ 21c:	df 90       	pop	r13
+ 21e:	cf 90       	pop	r12
+ 220:	08 95       	ret
+
+00000222 <test_14_16pin>:
+
+
+void test_14_16pin(void){
+	DDRA = pattern.Direction ;
+ 222:	e3 e7       	ldi	r30, 0x73	; 115
+ 224:	f0 e0       	ldi	r31, 0x00	; 0
+ 226:	80 81       	ld	r24, Z
+ 228:	8a bb       	out	0x1a, r24	; 26
+	DDRB = (pattern.Direction >> 8);
+ 22a:	80 81       	ld	r24, Z
+ 22c:	91 81       	ldd	r25, Z+1	; 0x01
+ 22e:	a2 81       	ldd	r26, Z+2	; 0x02
+ 230:	b3 81       	ldd	r27, Z+3	; 0x03
+ 232:	89 2f       	mov	r24, r25
+ 234:	9a 2f       	mov	r25, r26
+ 236:	ab 2f       	mov	r26, r27
+ 238:	bb 27       	eor	r27, r27
+ 23a:	87 bb       	out	0x17, r24	; 23
+	PORTA = pattern.logic;
+ 23c:	84 81       	ldd	r24, Z+4	; 0x04
+ 23e:	8b bb       	out	0x1b, r24	; 27
+	PORTB = (pattern.logic >> 8);
+ 240:	84 81       	ldd	r24, Z+4	; 0x04
+ 242:	95 81       	ldd	r25, Z+5	; 0x05
+ 244:	a6 81       	ldd	r26, Z+6	; 0x06
+ 246:	b7 81       	ldd	r27, Z+7	; 0x07
+ 248:	89 2f       	mov	r24, r25
+ 24a:	9a 2f       	mov	r25, r26
+ 24c:	ab 2f       	mov	r26, r27
+ 24e:	bb 27       	eor	r27, r27
+ 250:	88 bb       	out	0x18, r24	; 24
+	
+	concat = PINA + (PINB << 8) ;
+ 252:	29 b3       	in	r18, 0x19	; 25
+ 254:	86 b3       	in	r24, 0x16	; 22
+ 256:	90 e0       	ldi	r25, 0x00	; 0
+ 258:	98 2f       	mov	r25, r24
+ 25a:	88 27       	eor	r24, r24
+ 25c:	82 0f       	add	r24, r18
+ 25e:	91 1d       	adc	r25, r1
+ 260:	90 93 8d 00 	sts	0x008D, r25	; 0x80008d <concat+0x1>
+ 264:	80 93 8c 00 	sts	0x008C, r24	; 0x80008c <concat>
+ 268:	08 95       	ret
+
+0000026a <test_24pin>:
+}
+void test_24pin(void)
+{
+	DDRA = pattern.Direction ;
+ 26a:	e3 e7       	ldi	r30, 0x73	; 115
+ 26c:	f0 e0       	ldi	r31, 0x00	; 0
+ 26e:	80 81       	ld	r24, Z
+ 270:	8a bb       	out	0x1a, r24	; 26
+	DDRB = (pattern.Direction >> 8);
+ 272:	80 81       	ld	r24, Z
+ 274:	91 81       	ldd	r25, Z+1	; 0x01
+ 276:	a2 81       	ldd	r26, Z+2	; 0x02
+ 278:	b3 81       	ldd	r27, Z+3	; 0x03
+ 27a:	89 2f       	mov	r24, r25
+ 27c:	9a 2f       	mov	r25, r26
+ 27e:	ab 2f       	mov	r26, r27
+ 280:	bb 27       	eor	r27, r27
+ 282:	87 bb       	out	0x17, r24	; 23
+	DDRC = (pattern.Direction >> 16);
+ 284:	80 81       	ld	r24, Z
+ 286:	91 81       	ldd	r25, Z+1	; 0x01
+ 288:	a2 81       	ldd	r26, Z+2	; 0x02
+ 28a:	b3 81       	ldd	r27, Z+3	; 0x03
+ 28c:	cd 01       	movw	r24, r26
+ 28e:	aa 27       	eor	r26, r26
+ 290:	bb 27       	eor	r27, r27
+ 292:	84 bb       	out	0x14, r24	; 20
+	PORTA = pattern.logic;
+ 294:	84 81       	ldd	r24, Z+4	; 0x04
+ 296:	8b bb       	out	0x1b, r24	; 27
+	PORTB = (pattern.logic >> 8);
+ 298:	84 81       	ldd	r24, Z+4	; 0x04
+ 29a:	95 81       	ldd	r25, Z+5	; 0x05
+ 29c:	a6 81       	ldd	r26, Z+6	; 0x06
+ 29e:	b7 81       	ldd	r27, Z+7	; 0x07
+ 2a0:	49 2f       	mov	r20, r25
+ 2a2:	5a 2f       	mov	r21, r26
+ 2a4:	6b 2f       	mov	r22, r27
+ 2a6:	77 27       	eor	r23, r23
+ 2a8:	48 bb       	out	0x18, r20	; 24
+	PORTB = (pattern.logic >> 16);
+ 2aa:	cd 01       	movw	r24, r26
+ 2ac:	aa 27       	eor	r26, r26
+ 2ae:	bb 27       	eor	r27, r27
+ 2b0:	88 bb       	out	0x18, r24	; 24
+	
+	concat = PINA + (PINB << 8) + (PINC << 16) ;
+ 2b2:	29 b3       	in	r18, 0x19	; 25
+ 2b4:	86 b3       	in	r24, 0x16	; 22
+ 2b6:	90 e0       	ldi	r25, 0x00	; 0
+ 2b8:	98 2f       	mov	r25, r24
+ 2ba:	88 27       	eor	r24, r24
+ 2bc:	82 0f       	add	r24, r18
+ 2be:	91 1d       	adc	r25, r1
+ 2c0:	23 b3       	in	r18, 0x13	; 19
+ 2c2:	30 e0       	ldi	r19, 0x00	; 0
+ 2c4:	33 27       	eor	r19, r19
+ 2c6:	22 27       	eor	r18, r18
+ 2c8:	82 0f       	add	r24, r18
+ 2ca:	93 1f       	adc	r25, r19
+ 2cc:	90 93 8d 00 	sts	0x008D, r25	; 0x80008d <concat+0x1>
+ 2d0:	80 93 8c 00 	sts	0x008C, r24	; 0x80008c <concat>
+ 2d4:	08 95       	ret
+
+000002d6 <main>:
+    while (1) 
+    {
+		Get_Info(&ic);			
+		while(1){
+			Get_Pattern(&pattern_str,&new_ic);
+			if (!new_ic){
+ 2d6:	80 91 72 00 	lds	r24, 0x0072	; 0x800072 <__data_end>
+ 2da:	81 11       	cpse	r24, r1
+ 2dc:	4b c0       	rjmp	.+150    	; 0x374 <main+0x9e>
+				pattern_handling(pattern_str);
+ 2de:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <pattern_str>
+ 2e2:	90 91 62 00 	lds	r25, 0x0062	; 0x800062 <pattern_str+0x1>
+ 2e6:	0e 94 49 00 	call	0x92	; 0x92 <pattern_handling>
+				
+				if (ic.pins == 14 || ic.pins == 16)
+ 2ea:	80 91 95 00 	lds	r24, 0x0095	; 0x800095 <ic+0x4>
+ 2ee:	8e 30       	cpi	r24, 0x0E	; 14
+ 2f0:	11 f0       	breq	.+4      	; 0x2f6 <main+0x20>
+ 2f2:	80 31       	cpi	r24, 0x10	; 16
+ 2f4:	19 f4       	brne	.+6      	; 0x2fc <main+0x26>
+					test_14_16pin();
+ 2f6:	0e 94 11 01 	call	0x222	; 0x222 <test_14_16pin>
+ 2fa:	04 c0       	rjmp	.+8      	; 0x304 <main+0x2e>
+				else if (ic.pins == 24)
+ 2fc:	88 31       	cpi	r24, 0x18	; 24
+ 2fe:	59 f7       	brne	.-42     	; 0x2d6 <main>
+					test_24pin();
+ 300:	0e 94 35 01 	call	0x26a	; 0x26a <test_24pin>
+				else {
+					not_founded();
+					break;
+				}
+				
+				for (int i = 0 ; i < pattern.input_pins_size ; i++){
+ 304:	20 e0       	ldi	r18, 0x00	; 0
+ 306:	30 e0       	ldi	r19, 0x00	; 0
+ 308:	2f c0       	rjmp	.+94     	; 0x368 <main+0x92>
+					if (!(	((pattern.logic>> pattern.input_pins[i]) & 0x01 )   == ((concat>> pattern.input_pins[i]) & 0x01) )){
+ 30a:	80 91 77 00 	lds	r24, 0x0077	; 0x800077 <pattern+0x4>
+ 30e:	90 91 78 00 	lds	r25, 0x0078	; 0x800078 <pattern+0x5>
+ 312:	a0 91 79 00 	lds	r26, 0x0079	; 0x800079 <pattern+0x6>
+ 316:	b0 91 7a 00 	lds	r27, 0x007A	; 0x80007a <pattern+0x7>
+ 31a:	f9 01       	movw	r30, r18
+ 31c:	ed 58       	subi	r30, 0x8D	; 141
+ 31e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 320:	e0 85       	ldd	r30, Z+8	; 0x08
+ 322:	ac 01       	movw	r20, r24
+ 324:	bd 01       	movw	r22, r26
+ 326:	0e 2e       	mov	r0, r30
+ 328:	04 c0       	rjmp	.+8      	; 0x332 <main+0x5c>
+ 32a:	76 95       	lsr	r23
+ 32c:	67 95       	ror	r22
+ 32e:	57 95       	ror	r21
+ 330:	47 95       	ror	r20
+ 332:	0a 94       	dec	r0
+ 334:	d2 f7       	brpl	.-12     	; 0x32a <main+0x54>
+ 336:	80 91 8c 00 	lds	r24, 0x008C	; 0x80008c <concat>
+ 33a:	90 91 8d 00 	lds	r25, 0x008D	; 0x80008d <concat+0x1>
+ 33e:	02 c0       	rjmp	.+4      	; 0x344 <main+0x6e>
+ 340:	96 95       	lsr	r25
+ 342:	87 95       	ror	r24
+ 344:	ea 95       	dec	r30
+ 346:	e2 f7       	brpl	.-8      	; 0x340 <main+0x6a>
+ 348:	a0 e0       	ldi	r26, 0x00	; 0
+ 34a:	b0 e0       	ldi	r27, 0x00	; 0
+ 34c:	84 27       	eor	r24, r20
+ 34e:	95 27       	eor	r25, r21
+ 350:	a6 27       	eor	r26, r22
+ 352:	b7 27       	eor	r27, r23
+ 354:	80 ff       	sbrs	r24, 0
+ 356:	06 c0       	rjmp	.+12     	; 0x364 <main+0x8e>
+						flag = 0 ;
+ 358:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+						DDRA = 0x00;
+ 35c:	1a ba       	out	0x1a, r1	; 26
+						DDRB = 0x00;
+ 35e:	17 ba       	out	0x17, r1	; 23
+						DDRC = 0x00;
+ 360:	14 ba       	out	0x14, r1	; 20
+						break;
+ 362:	08 c0       	rjmp	.+16     	; 0x374 <main+0x9e>
+				else {
+					not_founded();
+					break;
+				}
+				
+				for (int i = 0 ; i < pattern.input_pins_size ; i++){
+ 364:	2f 5f       	subi	r18, 0xFF	; 255
+ 366:	3f 4f       	sbci	r19, 0xFF	; 255
+ 368:	80 91 87 00 	lds	r24, 0x0087	; 0x800087 <pattern+0x14>
+ 36c:	90 e0       	ldi	r25, 0x00	; 0
+ 36e:	28 17       	cp	r18, r24
+ 370:	39 07       	cpc	r19, r25
+ 372:	5c f2       	brlt	.-106    	; 0x30a <main+0x34>
+						DDRC = 0x00;
+						break;
+					}
+				}
+			}
+			if (flag){
+ 374:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 378:	81 11       	cpse	r24, r1
+ 37a:	ad cf       	rjmp	.-166    	; 0x2d6 <main>
+				show_String(ic.Name);
+			}
+			else {
+				flag = 1 ;
+ 37c:	81 e0       	ldi	r24, 0x01	; 1
+ 37e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 382:	a9 cf       	rjmp	.-174    	; 0x2d6 <main>
+
+00000384 <_exit>:
+ 384:	f8 94       	cli
+
+00000386 <__stop_program>:
+ 386:	ff cf       	rjmp	.-2      	; 0x386 <__stop_program>
