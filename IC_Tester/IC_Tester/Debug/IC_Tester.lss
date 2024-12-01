@@ -7,27 +7,27 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .data         00000012  00800060  00000388  0000041c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000024  00800072  00800072  0000042e  2**0
+  2 .bss          000004f7  00800072  00800072  0000042e  2**0
                   ALLOC
   3 .comment      00000030  00000000  00000000  0000042e  2**0
                   CONTENTS, READONLY
   4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000460  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000058  00000000  00000000  0000049c  2**0
+  5 .debug_aranges 00000080  00000000  00000000  0000049c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000849  00000000  00000000  000004f4  2**0
+  6 .debug_info   00000c70  00000000  00000000  0000051c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000601  00000000  00000000  00000d3d  2**0
+  7 .debug_abbrev 0000068a  00000000  00000000  0000118c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000003b0  00000000  00000000  0000133e  2**0
+  8 .debug_line   0000047c  00000000  00000000  00001816  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000000bc  00000000  00000000  000016f0  2**2
+  9 .debug_frame  00000118  00000000  00000000  00001c94  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000409  00000000  00000000  000017ac  2**0
+ 10 .debug_str    00000652  00000000  00000000  00001dac  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000000e6  00000000  00000000  00001bb5  2**0
+ 11 .debug_loc    00000182  00000000  00000000  000023fe  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000048  00000000  00000000  00001c9b  2**0
+ 12 .debug_ranges 00000070  00000000  00000000  00002580  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -77,7 +77,7 @@ Disassembly of section .text:
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
-  76:	20 e0       	ldi	r18, 0x00	; 0
+  76:	25 e0       	ldi	r18, 0x05	; 5
   78:	a2 e7       	ldi	r26, 0x72	; 114
   7a:	b0 e0       	ldi	r27, 0x00	; 0
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
@@ -86,7 +86,7 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	a6 39       	cpi	r26, 0x96	; 150
+  80:	a9 36       	cpi	r26, 0x69	; 105
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 6b 01 	call	0x2d6	; 0x2d6 <main>
@@ -124,8 +124,8 @@ void pattern_handling(char *pattern_string){
   b0:	55 1f       	adc	r21, r21
   b2:	0a 94       	dec	r0
   b4:	e2 f7       	brpl	.-8      	; 0xae <pattern_handling+0x1c>
-  b6:	50 93 8b 00 	sts	0x008B, r21	; 0x80008b <position+0x1>
-  ba:	40 93 8a 00 	sts	0x008A, r20	; 0x80008a <position>
+  b6:	50 93 bb 02 	sts	0x02BB, r21	; 0x8002bb <position+0x1>
+  ba:	40 93 ba 02 	sts	0x02BA, r20	; 0x8002ba <position>
 		if (pattern_str[i] == 'L' || pattern_str[i] == 'H'){
   be:	20 91 61 00 	lds	r18, 0x0061	; 0x800061 <pattern_str>
   c2:	30 91 62 00 	lds	r19, 0x0062	; 0x800062 <pattern_str+0x1>
@@ -358,8 +358,8 @@ void test_14_16pin(void){
  25a:	88 27       	eor	r24, r24
  25c:	82 0f       	add	r24, r18
  25e:	91 1d       	adc	r25, r1
- 260:	90 93 8d 00 	sts	0x008D, r25	; 0x80008d <concat+0x1>
- 264:	80 93 8c 00 	sts	0x008C, r24	; 0x80008c <concat>
+ 260:	90 93 bd 02 	sts	0x02BD, r25	; 0x8002bd <concat+0x1>
+ 264:	80 93 bc 02 	sts	0x02BC, r24	; 0x8002bc <concat>
  268:	08 95       	ret
 
 0000026a <test_24pin>:
@@ -423,8 +423,8 @@ void test_24pin(void)
  2c6:	22 27       	eor	r18, r18
  2c8:	82 0f       	add	r24, r18
  2ca:	93 1f       	adc	r25, r19
- 2cc:	90 93 8d 00 	sts	0x008D, r25	; 0x80008d <concat+0x1>
- 2d0:	80 93 8c 00 	sts	0x008C, r24	; 0x80008c <concat>
+ 2cc:	90 93 bd 02 	sts	0x02BD, r25	; 0x8002bd <concat+0x1>
+ 2d0:	80 93 bc 02 	sts	0x02BC, r24	; 0x8002bc <concat>
  2d4:	08 95       	ret
 
 000002d6 <main>:
@@ -443,7 +443,7 @@ void test_24pin(void)
  2e6:	0e 94 49 00 	call	0x92	; 0x92 <pattern_handling>
 				
 				if (ic.pins == 14 || ic.pins == 16)
- 2ea:	80 91 95 00 	lds	r24, 0x0095	; 0x800095 <ic+0x4>
+ 2ea:	80 91 68 05 	lds	r24, 0x0568	; 0x800568 <ic+0x4>
  2ee:	8e 30       	cpi	r24, 0x0E	; 14
  2f0:	11 f0       	breq	.+4      	; 0x2f6 <main+0x20>
  2f2:	80 31       	cpi	r24, 0x10	; 16
@@ -484,8 +484,8 @@ void test_24pin(void)
  330:	47 95       	ror	r20
  332:	0a 94       	dec	r0
  334:	d2 f7       	brpl	.-12     	; 0x32a <main+0x54>
- 336:	80 91 8c 00 	lds	r24, 0x008C	; 0x80008c <concat>
- 33a:	90 91 8d 00 	lds	r25, 0x008D	; 0x80008d <concat+0x1>
+ 336:	80 91 bc 02 	lds	r24, 0x02BC	; 0x8002bc <concat>
+ 33a:	90 91 bd 02 	lds	r25, 0x02BD	; 0x8002bd <concat+0x1>
  33e:	02 c0       	rjmp	.+4      	; 0x344 <main+0x6e>
  340:	96 95       	lsr	r25
  342:	87 95       	ror	r24

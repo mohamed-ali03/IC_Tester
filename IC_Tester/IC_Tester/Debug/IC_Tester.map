@@ -24,11 +24,15 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
+fs                  0x230             main.o
 Name                0x2               main.o
 position            0x2               main.o
 concat              0x2               main.o
 Number_of_pins      0x1               main.o
 text                0x2               main.o
+buffer              0x80              main.o
+fr                  0x1               main.o
+fil                 0x222             main.o
 ic                  0x5               main.o
 
 Discarded input sections
@@ -185,6 +189,16 @@ Discarded input sections
                 0x00000000        0x2 main.o
  .text.show_String
                 0x00000000        0x2 main.o
+ .text.UART_Init
+                0x00000000        0xe main.o
+ .text.UART_SendByte
+                0x00000000        0x8 main.o
+ .text.UART_SendString
+                0x00000000       0x1a main.o
+ .text.SPI_Init
+                0x00000000       0x12 main.o
+ .text.SPI_Transmit
+                0x00000000        0xa main.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
@@ -570,7 +584,7 @@ END GROUP
                 0x00800072                _edata = .
                 0x00800072                PROVIDE (__data_end, .)
 
-.bss            0x00800072       0x24
+.bss            0x00800072      0x4f7
                 0x00800072                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
@@ -579,22 +593,26 @@ END GROUP
  .bss.pattern   0x00800073       0x15 main.o
                 0x00800073                pattern
  *(COMMON)
- COMMON         0x00800088        0xe main.o
-                0x00800088                Name
-                0x0080008a                position
-                0x0080008c                concat
-                0x0080008e                Number_of_pins
-                0x0080008f                text
-                0x00800091                ic
-                0x00800096                PROVIDE (__bss_end, .)
+ COMMON         0x00800088      0x4e1 main.o
+                0x00800088                fs
+                0x008002b8                Name
+                0x008002ba                position
+                0x008002bc                concat
+                0x008002be                Number_of_pins
+                0x008002bf                text
+                0x008002c1                buffer
+                0x00800341                fr
+                0x00800342                fil
+                0x00800564                ic
+                0x00800569                PROVIDE (__bss_end, .)
                 0x00000388                __data_load_start = LOADADDR (.data)
                 0x0000039a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800096        0x0
+.noinit         0x00800569        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800096                _end = .
+                0x00800569                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -659,42 +677,42 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x58
+.debug_aranges  0x00000000       0x80
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x58 main.o
+                0x00000000       0x80 main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x849
+.debug_info     0x00000000      0xc70
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_info    0x000004e6      0x363 main.o
+ .debug_info    0x000004e6      0x78a main.o
 
-.debug_abbrev   0x00000000      0x601
+.debug_abbrev   0x00000000      0x68a
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_abbrev  0x000004a3      0x15e main.o
+ .debug_abbrev  0x000004a3      0x1e7 main.o
 
-.debug_line     0x00000000      0x3b0
+.debug_line     0x00000000      0x47c
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_line    0x00000116      0x29a main.o
+ .debug_line    0x00000116      0x366 main.o
 
-.debug_frame    0x00000000       0xbc
+.debug_frame    0x00000000      0x118
  *(.debug_frame)
- .debug_frame   0x00000000       0xbc main.o
+ .debug_frame   0x00000000      0x118 main.o
 
-.debug_str      0x00000000      0x409
+.debug_str      0x00000000      0x652
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_str     0x00000196      0x273 main.o
-                                0x2b6 (size before relaxing)
+ .debug_str     0x00000196      0x4bc main.o
+                                0x514 (size before relaxing)
 
-.debug_loc      0x00000000       0xe6
+.debug_loc      0x00000000      0x182
  *(.debug_loc)
- .debug_loc     0x00000000       0xe6 main.o
+ .debug_loc     0x00000000      0x182 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -714,9 +732,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x48
+.debug_ranges   0x00000000       0x70
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x48 main.o
+ .debug_ranges  0x00000000       0x70 main.o
 
 .debug_macro
  *(.debug_macro)

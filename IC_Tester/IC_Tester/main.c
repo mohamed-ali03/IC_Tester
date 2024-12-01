@@ -8,6 +8,23 @@
 #include "main.h"
 #include "ff.h"
 #include "diskio.h"
+// UART baud rate definition
+#define F_CPU 16000000UL
+#define BAUD 9600
+#define MYUBRR F_CPU/16/BAUD-1
+
+// Prototypes
+void UART_Init(unsigned int ubrr);
+void UART_SendByte(unsigned char data);
+void UART_SendString(const char *str);
+void SPI_Init(void);
+uint8_t SPI_Transmit(uint8_t data);
+char buffer[128];
+
+// FATFS objects
+FATFS fs;      // File system object
+FIL fil;       // File object
+FRESULT fr;
 MOD_Pattern pattern = {.input_pins_size = 0 ,.input_pins = {0}};
 IC_INFO ic ;
 // spi 
@@ -120,4 +137,43 @@ void Get_Pattern(char *pattern,uint8_t *End_Patterns_Flag)
 
 void show_String(char *name_of_IC){
 	
+}
+void UART_Init(unsigned int ubrr)
+{
+	UBRRH = (unsigned char)(ubrr >> 8);
+	UBRRL = (unsigned char)ubrr;
+	UCSRB = (1 << RXEN) | (1 << TXEN);  // Enable receiver and transmitter
+	UCSRC = (1 << URSEL) | (3 << UCSZ0);  // 8 data bits, 1 stop bit
+}
+
+// UART send a byte
+void UART_SendByte(unsigned char data)
+{
+	while (!(UCSRA & (1 << UDRE)));  // Wait until the buffer is empty
+	UDR = data;
+}
+
+// UART send a string
+void UART_SendString(const char *str)
+{
+	while (*str)
+	{
+		UART_SendByte(*str++);
+	}
+}
+
+// SPI initialization
+void SPI_Init(void)
+{
+	DDRB |= (1 << PORTB4) | (1 << PORTB5) | (1 << PORTB7);  // Set SS, MOSI, SCK as output
+	DDRB &= ~(1 << PORTB6);  // Set MISO as input
+	SPCR = (1 << SPE) | (1 << MSTR) | (1 << SPR0);  // Enable SPI, Master, set clock rate f/16
+}
+
+// SPI transmit data
+uint8_t SPI_Transmit(uint8_t data)
+{
+	SPDR = data;  // Load data into SPI data register
+	while (!(SPSR & (1 << SPIF)));  // Wait until transmission complete
+	return SPDR;  // Return received data
 }
