@@ -6,6 +6,8 @@
  */ 
 
 #include "main.h"
+#include "ff.h"
+#include "diskio.h"
 MOD_Pattern pattern = {.input_pins_size = 0 ,.input_pins = {0}};
 IC_INFO ic ;
 // spi 
