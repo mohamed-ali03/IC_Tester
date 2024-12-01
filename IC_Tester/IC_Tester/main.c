@@ -8,6 +8,9 @@
 #include "main.h"
 #include "ff.h"
 #include "diskio.h"
+#include <avr/io.h>
+#include <util/delay.h>
+#include <stdio.h>
 // UART baud rate definition
 #define F_CPU 16000000UL
 #define BAUD 9600
@@ -37,7 +40,75 @@ uint8_t new_ic = 0;
 
 int main(void)
 {
-    /* Replace with your application code */
+	 // Initialize UART, SPI, and FATFS
+	 UART_Init(MYUBRR);
+	 SPI_Init();
+	 UART_SendString("System Initialized\r\n");
+
+	 // Mount filesystem
+	 fr = f_mount(&fs, "", 1);
+	 if (fr == FR_OK)
+	 {
+		 UART_SendString("Filesystem mounted successfully\r\n");
+	 }
+	 else
+	 {
+		 UART_SendString("Failed to mount filesystem\r\n");
+		 while (1);  // Halt
+	 }
+	  // Initialize UART, SPI, and FATFS
+	  UART_Init(MYUBRR);
+	  SPI_Init();
+	  UART_SendString("System Initialized\r\n");
+
+	  // Mount filesystem
+	  fr = f_mount(&fs, "", 1);
+	  if (fr == FR_OK)
+	  {
+		  UART_SendString("Filesystem mounted successfully\r\n");
+	  }
+	  else
+	  {
+		  UART_SendString("Failed to mount filesystem\r\n");
+		  while (1);  // Halt
+	  }
+
+	  // Create and write to a file
+	  fr = f_open(&fil, "test.txt", FA_WRITE | FA_CREATE_ALWAYS);
+	  if (fr == FR_OK)
+	  {
+		  UART_SendString("File created successfully\r\n");
+		  f_write(&fil, "Hello, FATFS on ATmega32A!\r\n", 27, NULL);
+		  f_close(&fil);
+		  UART_SendString("Data written to file\r\n");
+	  }
+	  else
+	  {
+		  UART_SendString("Failed to create file\r\n");
+		  while (1);  // Halt
+	  }
+
+	  // Read back from the file
+	  fr = f_open(&fil, "test.txt", FA_READ);
+	  if (fr == FR_OK)
+	  {
+		  UART_SendString("File opened for reading\r\n");
+		  f_read(&fil, buffer, sizeof(buffer) - 1, NULL);
+		  f_close(&fil);
+		  UART_SendString("Data read from file: ");
+		  UART_SendString(buffer);
+		  UART_SendString("\r\n");
+	  }
+	  else
+	  {
+		  UART_SendString("Failed to open file for reading\r\n");
+		  while (1);  // Halt
+	  }
+
+	  // Unmount filesystem
+	  f_mount(NULL, "", 1);
+	  UART_SendString("Filesystem unmounted\r\n");
+
     while (1) 
     {
 		Get_Info(&ic);			
